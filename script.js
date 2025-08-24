@@ -3,7 +3,7 @@ const menuBtn = document.querySelector(".menu-btn");
 const navList = document.querySelector(".nav-bar ul");
 
 const closeBtn = document.querySelector(".close-btn");
-const mainContent = document.querySelector(".main-content");
+const mainContent = document.querySelector("body > *:not(header");
 
 menuBtn.addEventListener("click", () => {
   navList.classList.add("active");
@@ -11,6 +11,21 @@ menuBtn.addEventListener("click", () => {
   document.body.style.overflow = "hidden";
   mainContent.style.filter = "blur(5px)";
 });
+
+const navListItems = navList.querySelectorAll('li > a')
+
+navListItems.forEach((listItem) => {
+  listItem.addEventListener('click', closeModalWhenClicked)
+})
+
+function closeModalWhenClicked() {
+  if (navList.classList.contains('active')) {
+    navList.classList.toggle('active')
+
+    document.body.style.overflow = "";
+    mainContent.style.filter = ""
+  }
+}
 
 closeBtn.addEventListener("click", () => {
   navList.classList.toggle("active");

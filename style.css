@@ -34,6 +34,8 @@ body {
 .container {
   max-width: clamp(400px, 70vw, 1200px);
   margin-inline: auto;
+
+  scroll-margin-top: 70px;
 }
 
 @supports (width:calc-size(auto, size - 3em)) {
@@ -310,6 +312,7 @@ section.images {
         background-color: var(--bg);
         border: 1px solid var(--border-muted);
         z-index: 10;
+
 
         .close-btn {
           display: grid;
