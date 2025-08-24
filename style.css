@@ -1,0 +1,342 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+  --bg-dark: oklch(0.12 0.02 240);
+  --bg: oklch(0.15 0.02 240);
+  --bg-light: oklch(0.25 0.015 295);
+
+  --text: oklch(0.9 0.03 295);
+  --text-muted: oklch(0.76 0.03 295);
+
+  --highlight: oklch(0.4 0.03 295);
+  --border: oklch(0.3 0.03 295);
+  --border-muted: oklch(0.2 0.03 295);
+
+  --primary: oklch(0.68 0.2646 36);
+  --secondary: oklch(0.6 0.16 240);
+  --ff: "Poppins", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--ff);
+}
+
+body {
+  position: relative;
+  min-height: 100svh;
+  background-color: var(--bg-dark);
+  color: var(--text);
+}
+
+.container {
+  max-width: clamp(400px, 70vw, 1200px);
+  margin-inline: auto;
+}
+
+@supports (width:calc-size(auto, size - 3em)) {
+  .container {
+    width: calc-size(auto, min(1200px, size - 3em))
+  }
+}
+
+.btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  padding: 0.5rem;
+  cursor: pointer;
+
+  display: grid;
+  place-content: center;
+
+  transition: background-color .2s ease;
+
+  &.hidden {
+    display: none;
+  }
+
+  &:hover {
+    background-color: var(--bg-light);
+  }
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--bg);
+  border-bottom: 1px solid var(--highlight);
+
+  .nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .close-btn,
+    .menu-btn {
+      display: none;
+    }
+
+    .logo {
+      >a {
+        display: block;
+
+        text-decoration: none;
+        color: var(--secondary);
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+    }
+
+
+    >ul {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      height: 100%;
+
+      >hr {
+        height: 1.5rem;
+        color: var(--highlight);
+        margin-right: 1rem;
+      }
+
+      >li {
+        height: 100%;
+
+        >a {
+          display: block;
+          padding: 1rem 1.5rem;
+          text-decoration: none;
+          color: var(--text);
+
+          transition: background-color 0.2s ease;
+
+          &:has(svg) {
+            padding: 0.5rem;
+            display: grid;
+            place-content: center;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            border-top-color: var(--highlight);
+
+            transition: box-shadow .1s ease, background-color .1s ease;
+
+            &:hover {
+              box-shadow: 0 2px 6px color-mix(in oklch, var(--bg-light) 80%, transparent 20%);
+            }
+
+          }
+
+          &:hover {
+            background-color: var(--bg-light);
+          }
+        }
+      }
+    }
+  }
+}
+
+main {
+  padding-inline: 1rem;
+  padding-bottom: 2rem;
+
+  .container {
+    margin-top: 6rem;
+  }
+}
+
+section.story-summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  >* {
+    max-width: 60ch;
+  }
+
+  .text-wrapper {
+    >h1 {
+      font-size: clamp(1.75rem, 2vw + 1rem, 2.5rem);
+      margin-bottom: 1rem;
+    }
+
+    >p {
+      margin-bottom: .75rem;
+      line-height: 1.5;
+    }
+  }
+}
+
+section.main-content {
+
+  #enigmas-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+
+    >div {
+      max-width: 60ch;
+
+      >*:last-child {
+        line-height: 1.5;
+      }
+
+      &:first-child {
+        margin-bottom: 4rem;
+
+        .enigma-title {
+          font-size: clamp(1.5rem, 2vw + 1rem, 2.25rem);
+          font-weight: 800;
+        }
+      }
+
+      .enigma-title {
+        font-size: clamp(1rem, 2vw + 1rem, 1.75rem);
+        margin-bottom: .5rem;
+      }
+
+      .enigma-desc {
+        color: var(--text-muted);
+        margin-bottom: .75rem;
+      }
+
+      .shapes-list {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+
+        margin-left: 1rem;
+
+      }
+    }
+  }
+}
+
+section.images {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .75rem;
+
+  .btn {
+    &:last-child {
+      transform: rotate(180deg);
+    }
+  }
+
+
+  .img-wrapper {
+    width: 100%;
+    max-width: 675px;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+
+    .images {
+      display: flex;
+      gap: 1rem;
+      /*       transform: translateX(calc(-100% - 2rem)); */
+      transition: transform .6s ease-in-out;
+
+      >img {
+        /* ! -2rem for the first two images and their gaps, excluding the third image and its gap, /3 so we have 3 cols */
+        flex: 0 0 calc((100% - 2rem) / 3);
+        width: 100%;
+        object-fit: cover;
+        aspect-ratio: 1;
+        border-radius: 4px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  section.images .img-wrapper .images>img {
+    /* ! -1rem for the first image's gap, excluding the 2nd, /2 for 2 cols */
+    flex: 0 0 calc((100% - 1rem) / 2);
+  }
+}
+
+@media (max-width: 500px) {
+  section.images .img-wrapper .images>img {
+    flex: 0 0 100%;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  header {
+    .nav-bar {
+      padding-inline: 1.5rem;
+
+      .menu-btn {
+        /* center icon */
+        display: grid;
+        transition: box-shadow .1s ease, background-color .1s ease;
+
+        &:hover {
+          box-shadow: 0 2px 6px color-mix(in oklch, var(--bg-light) 80%, transparent 20%);
+        }
+      }
+
+      .logo {
+        >a {
+          font-size: 1.25rem;
+          padding-block: 1rem;
+        }
+      }
+
+      >ul {
+        --b-radius: 8px;
+
+        position: relative;
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        width: 100%;
+        max-width: clamp(250px, 50vw, 350px);
+        height: fit-content;
+        top: 50%;
+        left: 50%;
+        border-radius: var(--b-radius);
+        padding-block: 1rem;
+        translate: -50% -50%;
+        background-color: var(--bg);
+        border: 1px solid var(--border-muted);
+        z-index: 10;
+
+        .close-btn {
+          display: grid;
+          place-content: center;
+          position: absolute;
+          right: 5px;
+          top: 6px;
+
+          border-radius: calc(var(--b-radius) / 2);
+          border: none;
+        }
+
+        >hr {
+          height: 1px;
+          width: 2rem;
+          margin-right: 0;
+          margin-bottom: 1rem;
+        }
+
+        >li>a {
+          border-radius: 6px;
+        }
+
+        &.active {
+          display: flex;
+        }
+      }
+    }
+  }
+}
