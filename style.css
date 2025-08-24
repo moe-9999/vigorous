@@ -243,6 +243,7 @@ section.images {
 
     .images {
       display: flex;
+      max-width: 100%;
       gap: 1rem;
       /*       transform: translateX(calc(-100% - 2rem)); */
       transition: transform .6s ease-in-out;
